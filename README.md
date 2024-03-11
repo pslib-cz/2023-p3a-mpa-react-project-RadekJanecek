@@ -1,8 +1,9 @@
-# Název mého projektu, programu, hry...
+# Osadníci z Katanu
 
 ## Téma
 
-Tady bude krátký a úderný popis o účelu, významu, funkcionalitě...
+Cílem hry je stát se pánem Katanu (získat 10 bodů za postavené vesnice, města, cesty nebo za speciální kartičky). 
+V průběhu hry sbíráte různé suroviny a vyměňuje te je za vylepšení vaší osady.
 
 ## Odkazy pro vývoj
 
