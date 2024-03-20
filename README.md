@@ -1,9 +1,9 @@
-# Osadníci z Katanu
+# 6 bere!
 
 ## Téma
 
-Cílem hry je stát se pánem Katanu (získat 10 bodů za postavené vesnice, města, cesty nebo za speciální kartičky). 
-V průběhu hry sbíráte různé suroviny a vyměňuje te je za vylepšení vaší osady.
+Cílem hry je mít nejmenší počet trestných bodů.
+Hra je pro 2-10 hráčů, každý hráč na začátku hry dostane 10 karet. Uprostřed jsou další 4 karty na které hráči pokládají karty které mají větší číslo.
 
 ## Odkazy pro vývoj
 
