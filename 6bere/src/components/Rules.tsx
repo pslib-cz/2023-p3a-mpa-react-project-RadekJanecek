@@ -1,3 +1,5 @@
+import styles from './Rules.module.css';
+
 export const Rules = () => {
   return (
     <div>
