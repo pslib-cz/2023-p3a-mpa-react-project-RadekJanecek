@@ -7,17 +7,25 @@ export type PlayersType = {
     lives: number;
 }
 
+export type CardType = {
+    id: number;
+    value: number;
+    lives: number;
+}
+
+export type CardsType = CardType[];
+
 type PlayerContextType = {
     players: PlayersType;
     updatePlayers: (newPlayers: PlayersType) => void;
 }
 
-export const PlayerContext = createContext<PlayerContextType>({
+export const Context = createContext<PlayerContextType>({
     players: { id: 1, name: 'player', lives: 66 },
     updatePlayers: () => {}
 });
 
-const PlayerProvider: React.FC<PropsWithChildren> = ({ children }) => {
+const ContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const [players, setPlayers] = useState<PlayersType>({ id: 1, name: 'player', lives: 66 });
 
     const updatePlayers = (newPlayers: PlayersType) => {
@@ -25,10 +33,10 @@ const PlayerProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
 
     return (
-        <PlayerContext.Provider value={{ players, updatePlayers }}>
+        <Context.Provider value={{ players, updatePlayers }}>
             {children}
-        </PlayerContext.Provider>
+        </Context.Provider>
     )
 }
 
-export default PlayerProvider;
+export default ContextProvider;

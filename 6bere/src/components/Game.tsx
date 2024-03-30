@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Game.module.css';
 
 export const Game = () => {
@@ -5,7 +6,7 @@ export const Game = () => {
     <div>
       <h1>Game</h1>
       <div>
-        <a href="/">Zpět</a>
+        <Link to="/">Zpět</Link>
       </div>
     </div>
   );

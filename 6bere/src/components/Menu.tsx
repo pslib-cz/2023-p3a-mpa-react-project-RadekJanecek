@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Menu.module.css';
 
 export const Menu = () => {
@@ -6,8 +7,8 @@ export const Menu = () => {
       <div>
         <h1>6bere!</h1>
         <div>
-          <a href="/game">Hrát</a>
-          <a href="/rules">Pravidla</a>
+          <Link to="/game">Hrát</Link>
+          <Link to="/rules">Pravidla</Link>
         </div>
       </div>
     </>

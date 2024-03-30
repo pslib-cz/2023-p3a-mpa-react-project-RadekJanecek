@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Rules.module.css';
 
 export const Rules = () => {
@@ -5,7 +6,7 @@ export const Rules = () => {
     <div>
       <h1>Pravidla</h1>
       <div>
-        <a href="/">Zpět</a>
+        <Link to="/">Zpět</Link>
       </div>
     </div>
   );

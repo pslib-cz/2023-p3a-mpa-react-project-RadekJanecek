@@ -12,12 +12,12 @@ function App() {
       <Route path="/game" element={<Game />} />,
       <Route path="/rules" element={<Rules />} />
     ]),
-  )
+  );
   return (
     <>
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
 export default App
