@@ -1,5 +1,5 @@
 .card {
-    background-image: url(../../public/images/cards.jpg);
+    background-image: url(/images/cards.jpg);
     width: 66px;
     height: 102px;
     opacity: 1;
