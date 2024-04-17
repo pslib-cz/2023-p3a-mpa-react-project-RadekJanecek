@@ -66,7 +66,9 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 return newState;
             }
             case 'PLAY_CARD': {
-                newState.players[action.playerId].cards.splice(action.cardId, 1);
+                newState.players[action.playerId].cards.splice(action.cardId);
+                newState.selectedCards.push(newState.players[action.playerId].cards[action.cardId]);
+                console.log(newState.selectedCards);
                 return newState;
             }
             case 'GET_COWS': {
