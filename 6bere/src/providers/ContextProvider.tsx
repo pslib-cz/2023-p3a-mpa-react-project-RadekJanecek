@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useReducer, useState } from "react";
+import { PropsWithChildren, createContext, useReducer } from "react";
 import React from "react";
 import { cards } from "../data/cards";
 
@@ -91,6 +91,12 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                         newState.centerCards[0] = [card];
                     } else {
                         newState.centerCards[closestCenterIndex].push(card);
+                    }
+
+                    if (newState.centerCards[closestCenterIndex].length === 6) {
+                        newState.centerCards[closestCenterIndex].splice(0, 5).forEach(card => {
+                            player.lives -= card.lives;
+                        });
                     }
                 });
                 newState.selectedCards = [];
