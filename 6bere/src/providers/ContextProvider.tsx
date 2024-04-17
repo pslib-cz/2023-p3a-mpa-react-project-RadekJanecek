@@ -66,8 +66,35 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 return newState;
             }
             case 'PLAY_CARD': {
-                newState.players[action.playerId].cards.splice(action.cardId);
-                newState.selectedCards.push(newState.players[action.playerId].cards[action.cardId]);
+                const player = newState.players[action.playerId];
+                if (player) {
+                    const cardIndex = player.cards.findIndex(card => card.id === action.cardId);
+                    if (cardIndex !== -1) {
+                        const [card] = player.cards.splice(cardIndex, 1);
+                        newState.selectedCards.push(card);
+                    }
+                }
+                newState.selectedCards.sort((a, b) => a.id - b.id);
+                newState.selectedCards.forEach(card => {
+                    let closestCenterIndex = -1;
+                    let smallestDifference = Infinity;
+            
+                    newState.centerCards.forEach((centerCards, index) => {
+                        const lastCardId = centerCards[centerCards.length - 1].id;
+                        if (card.id > lastCardId && card.id - lastCardId < smallestDifference) {
+                            smallestDifference = card.id - lastCardId;
+                            closestCenterIndex = index;
+                        }
+                    });
+            
+                    if (closestCenterIndex === -1) {
+                        newState.centerCards[0] = [card];
+                    } else {
+                        newState.centerCards[closestCenterIndex].push(card);
+                    }
+                });
+                newState.selectedCards = [];
+            
                 console.log(newState.selectedCards);
                 return newState;
             }

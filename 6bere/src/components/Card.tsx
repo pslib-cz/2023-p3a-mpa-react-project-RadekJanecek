@@ -1,5 +1,6 @@
+import { useContext } from 'react';
 import React from 'react';
-import { CardType } from '../providers/ContextProvider';
+import { CardType, Context } from '../providers/ContextProvider';
 import styles from './Card.module.css';
 
 type CardProps = {
@@ -7,8 +8,10 @@ type CardProps = {
 };
 
 export const Card: React.FC<CardProps> = ({ card }) => {
+  const context = useContext(Context);
+
   return (
-    <div className={styles.card} style={{backgroundPosition: card.position}}></div>
+    <div className={styles.card} style={{backgroundPosition: card.position}} onClick={() => {context.dispatch({type: 'PLAY_CARD', playerId: 1, cardId: card.id})}}></div>
   );
 };
 
