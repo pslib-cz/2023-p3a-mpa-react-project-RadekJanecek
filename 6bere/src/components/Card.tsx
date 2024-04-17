@@ -6,10 +6,13 @@ type CardProps = {
   card: CardType;
 };
 
+const handleClick = () => {
+  
+};
+
 export const Card: React.FC<CardProps> = ({ card }) => {
   return (
-    <div className={styles.card} style={{backgroundPosition: card.position}}>
-    </div>
+    <div className={styles.card} style={{backgroundPosition: card.position}} onClick={handleClick}></div>
   );
 };
 

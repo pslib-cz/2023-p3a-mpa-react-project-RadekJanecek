@@ -25,7 +25,8 @@ type Action =
 type GameState = {
     deck: CardType[];
     players: PlayersType[];
-    centerCards: CardType[];
+    centerCards: CardType[][];
+    selectedCards: CardType[];
 };
 
 interface IContext {
@@ -49,7 +50,8 @@ const initialState: GameState = {
         { id: 0, name: 'Player', lives: 66, cards: [] },
         { id: 1, name: 'Bot', lives: 66, cards: [] }
     ],
-    centerCards: []
+    centerCards: [],
+    selectedCards: []
 };
 
 const gameReducer = (state: GameState, action: Action): GameState => {
@@ -60,7 +62,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 newState.players.forEach((player) => {
                     player.cards = newState.deck.splice(0, 10);
                 });
-                newState.centerCards = newState.deck.splice(0, 4);
+                for (let i = 0; i < 4; i++) newState.centerCards[i] = newState.deck.splice(0, 1);
                 return newState;
             }
             case 'PLAY_CARD': {
