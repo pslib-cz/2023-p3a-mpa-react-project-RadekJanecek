@@ -92,7 +92,6 @@ const gameReducer = (state: GameState, action: Action): GameState => {
             
                     if (closestCenterIndex === -1) {
                             state.showArrows = true;
-                            console.log(newState.selectedCards);
                             return newState;
                         } else {
                             newState.centerCards[closestCenterIndex].push(card);
@@ -133,10 +132,11 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 const player = newState.players.find(player => player.id === action.playerId);
                 if (cardIndex !== -1 && player) {
                     const [card] = newState.selectedCards.splice(cardIndex, 1);
-                    newState.centerCards[action.rowIndex] = [card];
                     newState.centerCards[action.rowIndex].forEach(card => {
                         player.lives -= card.lives;
                     });
+                    newState.centerCards[action.rowIndex] = [card];
+                    newState.players[0].lives = player.lives;
                 }
                 return newState;
             }
