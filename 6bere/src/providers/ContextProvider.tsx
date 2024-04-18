@@ -21,7 +21,7 @@ type Action =
   | { type: 'GET_COWS'; playerId: number; cardId: number; CardLives: number }
   | { type: 'ADD_BOT' }
   | { type: 'REMOVE_BOT' }
-  | { type: 'SELECT_ROW' }
+  | { type: 'SELECT_ROW'; playerId: number; cardId: number; rowIndex: number}
 
 type GameState = {
     deck: CardType[];
@@ -92,8 +92,12 @@ const gameReducer = (state: GameState, action: Action): GameState => {
             
                     if (closestCenterIndex === -1) {
                             state.showArrows = true;
+                            console.log(newState.selectedCards);
+                            return newState;
                         } else {
                             newState.centerCards[closestCenterIndex].push(card);
+                            newState.showArrows = false;
+                            newState.selectedCards = [];
                         }
 
                     if (newState.centerCards[closestCenterIndex].length === 6) {
@@ -102,7 +106,6 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                         });
                     }
                 });
-                newState.selectedCards = [];
             
                 console.log(newState.selectedCards);
                 return newState;
@@ -126,7 +129,16 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 return newState;
             }
             case 'SELECT_ROW': {
-                
+                const cardIndex = newState.selectedCards.findIndex(card => card.id === action.cardId);
+                const player = newState.players.find(player => player.id === action.playerId);
+                if (cardIndex !== -1 && player) {
+                    const [card] = newState.selectedCards.splice(cardIndex, 1);
+                    newState.centerCards[action.rowIndex] = [card];
+                    newState.centerCards[action.rowIndex].forEach(card => {
+                        player.lives -= card.lives;
+                    });
+                }
+                return newState;
             }
         }
         return newState;
