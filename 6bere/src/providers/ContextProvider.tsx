@@ -17,16 +17,18 @@ export type CardType = {
 
 type Action =
     { type: 'DEAL_CARDS' }
-  | { type: 'PLAY_CARD'; playerId: number; cardId: number }
+  | { type: 'PLAY_CARD'; playerId: number; cardId: number; selectedRowIndex: number}
   | { type: 'GET_COWS'; playerId: number; cardId: number; CardLives: number }
   | { type: 'ADD_BOT' }
   | { type: 'REMOVE_BOT' }
+  | { type: 'SELECT_ROW' }
 
 type GameState = {
     deck: CardType[];
     players: PlayersType[];
     centerCards: CardType[][];
     selectedCards: CardType[];
+    showArrows: boolean;
 };
 
 interface IContext {
@@ -51,7 +53,8 @@ const initialState: GameState = {
         { id: 1, name: 'Bot', lives: 66, cards: [] }
     ],
     centerCards: [],
-    selectedCards: []
+    selectedCards: [],
+    showArrows: false
 };
 
 const gameReducer = (state: GameState, action: Action): GameState => {
@@ -88,10 +91,10 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     });
             
                     if (closestCenterIndex === -1) {
-                        newState.centerCards[0] = [card];
-                    } else {
-                        newState.centerCards[closestCenterIndex].push(card);
-                    }
+                            state.showArrows = true;
+                        } else {
+                            newState.centerCards[closestCenterIndex].push(card);
+                        }
 
                     if (newState.centerCards[closestCenterIndex].length === 6) {
                         newState.centerCards[closestCenterIndex].splice(0, 5).forEach(card => {
@@ -121,6 +124,9 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     return newState;
                 }
                 return newState;
+            }
+            case 'SELECT_ROW': {
+                
             }
         }
         return newState;

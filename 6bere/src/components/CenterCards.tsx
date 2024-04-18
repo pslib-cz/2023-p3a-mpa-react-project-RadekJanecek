@@ -13,6 +13,13 @@ export const CenterCards = () => {
             {cards.map((card) => (
                 <Card key={card.id} card={card} />
             ))}
+            {
+              context.state.showArrows && (
+                <div className={styles.arrow} onClick={() => context.dispatch({ type: 'SELECT_ROW'})}>
+                  {'<'}
+                </div>
+              )
+            }
           </div>
         ))}
         </div>
