@@ -109,10 +109,6 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 console.log(newState.selectedCards);
                 return newState;
             }
-            case 'GET_COWS': {
-                newState.players[action.playerId].lives -= newState.deck[action.cardId].lives;
-                return newState;
-            }
             case 'ADD_BOT': {
                 if (newState.players.length < 10) {
                     newState.players.push({id: newState.players.length, name: 'Bot' + newState.players.length, lives: 66, cards: []});
@@ -137,6 +133,8 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     });
                     newState.centerCards[action.rowIndex] = [card];
                     newState.players[0].lives = player.lives;
+                    newState.showArrows = false;
+                    newState.selectedCards = newState.selectedCards.splice(cardIndex, 1);
                 }
                 return newState;
             }
