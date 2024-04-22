@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import styles from './Game.module.css';
 import { useContext, useEffect} from 'react';
 import { Context } from '../providers/ContextProvider.tsx';
 import { PlayerCards } from './PlayerCards.tsx';

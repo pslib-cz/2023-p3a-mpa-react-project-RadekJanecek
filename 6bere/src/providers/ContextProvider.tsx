@@ -21,7 +21,7 @@ type Action =
   | { type: 'GET_COWS'; playerId: number; cardId: number; CardLives: number }
   | { type: 'ADD_BOT' }
   | { type: 'REMOVE_BOT' }
-  | { type: 'SELECT_ROW'; playerId: number; cardId: number; rowIndex: number}
+  | { type: 'SELECT_ROW' }
 
 type GameState = {
     deck: CardType[];
@@ -92,11 +92,8 @@ const gameReducer = (state: GameState, action: Action): GameState => {
             
                     if (closestCenterIndex === -1) {
                             state.showArrows = true;
-                            return newState;
                         } else {
                             newState.centerCards[closestCenterIndex].push(card);
-                            newState.showArrows = false;
-                            newState.selectedCards = [];
                         }
 
                     if (newState.centerCards[closestCenterIndex].length === 6) {
@@ -105,8 +102,13 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                         });
                     }
                 });
+                newState.selectedCards = [];
             
                 console.log(newState.selectedCards);
+                return newState;
+            }
+            case 'GET_COWS': {
+                newState.players[action.playerId].lives -= newState.deck[action.cardId].lives;
                 return newState;
             }
             case 'ADD_BOT': {
@@ -124,19 +126,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 return newState;
             }
             case 'SELECT_ROW': {
-                const cardIndex = newState.selectedCards.findIndex(card => card.id === action.cardId);
-                const player = newState.players.find(player => player.id === action.playerId);
-                if (cardIndex !== -1 && player) {
-                    const [card] = newState.selectedCards.splice(cardIndex, 1);
-                    newState.centerCards[action.rowIndex].forEach(card => {
-                        player.lives -= card.lives;
-                    });
-                    newState.centerCards[action.rowIndex] = [card];
-                    newState.players[0].lives = player.lives;
-                    newState.showArrows = false;
-                    newState.selectedCards = newState.selectedCards.splice(cardIndex, 1);
-                }
-                return newState;
+                
             }
         }
         return newState;
