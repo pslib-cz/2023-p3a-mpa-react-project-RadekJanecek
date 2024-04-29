@@ -3,6 +3,7 @@ import { useContext, useEffect} from 'react';
 import { Context } from '../providers/ContextProvider.tsx';
 import { PlayerCards } from './PlayerCards.tsx';
 import { CenterCards } from './CenterCards.tsx';
+import { Bot } from './Bot.tsx';
 
 export const Game = () => {
   const context = useContext(Context);

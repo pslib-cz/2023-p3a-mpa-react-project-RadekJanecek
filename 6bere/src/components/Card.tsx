@@ -13,7 +13,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
   const playCard = () => {
     const selectedCard = context.state.selectedCards[0];
     if (!context.state.showArrows || (selectedCard && selectedCard.id === card.id)) {
-      context.dispatch({type: 'PLAY_CARD', playerId: 1, cardId: card.id, selectedRowIndex: 0});
+      context.dispatch({type: 'PLAY_CARD', playerId: 0, cardId: card.id, selectedRowIndex: 0});
     }
   };
 

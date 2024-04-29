@@ -5,7 +5,7 @@ import styles from './PlayerCards.module.css';
 
 export const PlayerCards = () => {
     const context = useContext(Context);
-    const player = context.state.players.find(player => player.id === 1);
+    const player = context.state.players.find(player => player.id === 0);
 
     return (
         <div className={styles["cards"]}>
