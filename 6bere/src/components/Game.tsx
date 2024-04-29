@@ -18,6 +18,7 @@ export const Game = () => {
         <CenterCards />
         <PlayerCards />
         <Link to="/">Zpět</Link>
+        <Bot />
       </div>
     </div>
   );
