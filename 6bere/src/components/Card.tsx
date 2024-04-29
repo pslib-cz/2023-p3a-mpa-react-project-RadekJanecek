@@ -10,8 +10,15 @@ type CardProps = {
 export const Card: React.FC<CardProps> = ({ card }) => {
   const context = useContext(Context);
 
+  const playCard = () => {
+    const selectedCard = context.state.selectedCards[0];
+    if (!context.state.showArrows || (selectedCard && selectedCard.id === card.id)) {
+      context.dispatch({type: 'PLAY_CARD', playerId: 1, cardId: card.id, selectedRowIndex: 0});
+    }
+  };
+
   return (
-    <div className={styles.card} style={{backgroundPosition: card.position}} onClick={() => {context.dispatch({type: 'PLAY_CARD', playerId: 1, cardId: card.id, selectedRowIndex: 0})}}></div>
+    <div className={styles.card} style={{backgroundPosition: card.position}} onClick={playCard}></div>
   );
 };
 
