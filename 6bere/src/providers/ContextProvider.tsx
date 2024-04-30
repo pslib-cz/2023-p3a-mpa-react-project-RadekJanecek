@@ -12,7 +12,7 @@ export type PlayersType = {
 export type CardType = {
     id: number;
     lives: number;
-    position: string;
+    image: string;
 }
 
 type Action =

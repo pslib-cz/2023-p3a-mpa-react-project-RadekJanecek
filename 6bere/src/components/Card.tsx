@@ -18,7 +18,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
   };
 
   return (
-    <div className={styles.card} style={{backgroundPosition: card.position}} onClick={playCard}></div>
+    <div className={styles.card} style={{backgroundImage: `url(${card.image})`}} onClick={playCard}></div>
   );
 };
 
