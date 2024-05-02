@@ -6,7 +6,7 @@ export const Menu = () => {
       <div>
         <h1>6bere!</h1>
         <div>
-          <Link to="/botselect">Hrát</Link>
+          <Link to="/game">Hrát</Link>
           <Link to="/rules">Pravidla</Link>
         </div>
       </div>

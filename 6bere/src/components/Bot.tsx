@@ -23,7 +23,7 @@ export const Bot = ({botId}: {botId: number}) => {
       console.log(context.state.selectedCards);
       setBotHasPlayed(true);
     }
-  }, [context.state.selectedCards]);
+  }, [context.state.players[0].cards]);
 
   return (
     <></>

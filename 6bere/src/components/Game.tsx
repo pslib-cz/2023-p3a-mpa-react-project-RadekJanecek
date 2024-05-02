@@ -15,8 +15,6 @@ export const Game = () => {
       context.dispatch({ type: 'DEAL_CARDS' });
     }
   }, [context.state.players[0].cards]);
-
-  const botIds = context.state.players.map((player, index) => index).slice(1);
   
   return (
     <div>
@@ -25,7 +23,7 @@ export const Game = () => {
         <CenterCards />
         <PlayerCards />
         <Link to="/">Zpět</Link>
-        {botIds.map(botId => <Bot key={botId} botId={botId} />)}
+        <Bot botId={1} />
       </div>
     </div>
   );

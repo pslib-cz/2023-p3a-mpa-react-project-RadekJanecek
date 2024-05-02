@@ -13,6 +13,7 @@ export type CardType = {
     id: number;
     lives: number;
     image: string;
+    PlayerId?: number;
 }
 
 type Action =
@@ -92,10 +93,13 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     if (closestCenterIndex === -1) {
                             state.showArrows = true;
                             return newState;
-                        } else {
-                            newState.centerCards[closestCenterIndex].push(newState.selectedCards[0]);
-                            newState.showArrows = false;
-                            newState.selectedCards.splice(0, 1);
+                        } 
+                    else {
+                            for (let i = 0; i < newState.selectedCards.length; ) {
+                                newState.centerCards[closestCenterIndex].push(newState.selectedCards[0]);
+                                newState.showArrows = false;
+                                newState.selectedCards.splice(0, 1);
+                            }
                         }
 
                     if (newState.centerCards[closestCenterIndex].length === 6) {
@@ -106,20 +110,6 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 });
             
                 console.log(newState.selectedCards);
-                return newState;
-            }
-            case 'ADD_BOT': {
-                if (newState.players.length < 10) {
-                    newState.players.push({id: newState.players.length, name: 'Bot' + newState.players.length, lives: 66, cards: []});
-                return newState;
-                }
-                return newState;
-            }
-            case 'REMOVE_BOT': {
-                if (newState.players.length > 2) {
-                    newState.players.splice(newState.players.length - 1, 1);
-                    return newState;
-                }
                 return newState;
             }
             case 'SELECT_ROW': {
