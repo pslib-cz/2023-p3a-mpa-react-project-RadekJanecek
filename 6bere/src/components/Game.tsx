@@ -15,6 +15,11 @@ export const Game = () => {
       context.dispatch({ type: 'DEAL_CARDS' });
     }
   }, [context.state.players[0].cards]);
+  useEffect(() => {
+    if (context.state.selectedCards.length === context.state.players.length) {
+      context.dispatch({ type: 'PLAY_CARD', playerId: context.state.selectedCards[0].playerId ?? 0, cardId: context.state.selectedCards[0].id, selectedRowIndex: 0 });
+    }
+  }, [context.state.selectedCards]);
   
   return (
     <div>

@@ -19,29 +19,11 @@ export const Bot = ({botId}: {botId: number}) => {
           closestCard = card;
         }
       });
-
-      const isSmallerThanAllRows = context.state.centerCards.every(row => closestCard.id < row[row.length - 1].id);
-      let selectedRowIndex = 0;
-
-      if (isSmallerThanAllRows) {
-        let minLives = Infinity;
-        context.state.centerCards.forEach((row, index) => {
-          const totalLives = row.reduce((sum, card) => sum + card.lives, 0);
-          if (totalLives < minLives) {
-            minLives = totalLives;
-            selectedRowIndex = index;
-            context.dispatch({ type: 'PLAY_CARD', playerId: botId, cardId: closestCard.id, selectedRowIndex });
-            context.dispatch({ type: 'SELECT_ROW', playerId: botId, cardId: closestCard.id, rowIndex: selectedRowIndex })
-          }
-        });
-      }
-      else {
-        context.dispatch({ type: 'PLAY_CARD', playerId: botId, cardId: closestCard.id, selectedRowIndex: 0});
-      }
+      context.dispatch({ type: 'SELECT_CARD', playerId: botId, cardId: closestCard.id });
       console.log(context.state.selectedCards);
       setBotHasPlayed(true);
     }
-  }, [context.state.players[0].cards]);
+  }, [context.state.selectedCards]);
 
   return (
     <></>
