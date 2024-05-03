@@ -94,7 +94,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                             state.showArrows = true;
                             return newState;
                         } 
-                    else {
+                    else if (!newState.showArrows) {
                             for (let i = 0; i < newState.selectedCards.length; ) {
                                 newState.centerCards[closestCenterIndex].push(newState.selectedCards[0]);
                                 newState.showArrows = false;
@@ -109,7 +109,6 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     }
                 });
             
-                console.log(newState.selectedCards);
                 return newState;
             }
             case 'SELECT_ROW': {
