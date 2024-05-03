@@ -97,8 +97,10 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                   });
               
                   if (closestCenterIndex !== -1) {
-                    newState.centerCards[closestCenterIndex].push(card);
-                    newState.selectedCards = newState.selectedCards.filter(c => c.id !== card.id);
+                    if (!newState.showArrows) {
+                        newState.centerCards[closestCenterIndex].push(card);
+                        newState.selectedCards = newState.selectedCards.filter(c => c.id !== card.id);
+                    }
               
                     if (newState.centerCards[closestCenterIndex].length === 6) {
                       newState.centerCards[closestCenterIndex].splice(0, 5).forEach(card => {

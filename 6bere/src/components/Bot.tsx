@@ -7,7 +7,7 @@ export const Bot = ({botId}: {botId: number}) => {
 
   useEffect(() => {
     setBotHasPlayed(false);
-    if (context.state.players[botId].cards.length > 0 && !botHasPlayed) {
+    if (context.state.players[0].cards.length < context.state.players[botId].cards.length && !botHasPlayed) {
       const lastCenterCardId = context.state.centerCards[context.state.centerCards.length - 1][0].id;
       let closestCard = context.state.players[botId].cards[0];
       let smallestDifference = Math.abs(closestCard.id - lastCenterCardId);
@@ -23,7 +23,7 @@ export const Bot = ({botId}: {botId: number}) => {
       console.log(context.state.selectedCards);
       setBotHasPlayed(true);
     }
-  }, [context.state.selectedCards]);
+  }, [context.state.players[0].cards]);
 
   return (
     <></>
