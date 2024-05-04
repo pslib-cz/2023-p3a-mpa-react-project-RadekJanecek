@@ -23,6 +23,7 @@ type Action =
   | { type: 'ADD_BOT' }
   | { type: 'REMOVE_BOT' }
   | { type: 'SELECT_ROW'; playerId: number; cardId: number; rowIndex: number}
+  | { type: 'CHECK_GAME_OVER' }
 
 type GameState = {
     deck: CardType[];
@@ -30,6 +31,7 @@ type GameState = {
     centerCards: CardType[][];
     selectedCards: CardType[];
     showArrows: boolean;
+    gameOver: boolean;
 };
 
 interface IContext {
@@ -55,7 +57,8 @@ const initialState: GameState = {
       ...Array.from({ length: numBots }, (_, i) => ({ id: i + 1, name: `Bot${i + 1}`, lives: 66, cards: [] })),],
     centerCards: [],
     selectedCards: [],
-    showArrows: false
+    showArrows: false,
+    gameOver: false
 };
 
 const gameReducer = (state: GameState, action: Action): GameState => {
@@ -182,6 +185,21 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                   return newState;
               }
               return newState;
+          }
+          case 'CHECK_GAME_OVER': {
+            let anyPlayerDead = false;
+            newState.players.forEach(player => {
+              if (player.lives <= 0) {
+                anyPlayerDead = true;
+              }
+            });
+          
+            if (anyPlayerDead) {
+              newState.players.sort((a, b) => b.lives - a.lives);
+              newState.gameOver = true;
+            }
+          
+            return newState;
           }
         }
         return newState;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useContext, useEffect} from 'react';
 import { Context } from '../providers/ContextProvider.tsx';
 import { PlayerCards } from './PlayerCards.tsx';
@@ -8,7 +8,14 @@ import styles from './Game.module.css';
 
 export const Game = () => {
   const context = useContext(Context);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    context.dispatch({ type: 'CHECK_GAME_OVER' });
+    if (context.state.gameOver) {
+      navigate('/leaderboard')
+    }
+  }, [context.state.players[0].cards.length === 0]);
   useEffect(() => {
     if (context.state.players[0].cards.length === 0 && context.state.selectedCards.length === 0) {
       context.dispatch({ type: 'DEAL_CARDS' });
