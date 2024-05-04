@@ -54,6 +54,7 @@ const initialState: GameState = {
     deck: cards,
     players: [
       {id: 0, name: 'Player', lives: 66, cards: []},
+      {id: 1, name: 'Bot1', lives: 66, cards: []},
       ...Array.from({ length: numBots }, (_, i) => ({ id: i + 1, name: `Bot${i + 1}`, lives: 66, cards: [] })),],
     centerCards: [],
     selectedCards: [],
