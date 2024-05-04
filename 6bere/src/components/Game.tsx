@@ -4,14 +4,13 @@ import { Context } from '../providers/ContextProvider.tsx';
 import { PlayerCards } from './PlayerCards.tsx';
 import { CenterCards } from './CenterCards.tsx';
 import { Bot } from './Bot.tsx';
-import { cards } from '../data/cards.ts';
+import styles from './Game.module.css';
 
 export const Game = () => {
   const context = useContext(Context);
 
   useEffect(() => {
     if (context.state.players[0].cards.length === 0 && context.state.selectedCards.length === 0) {
-      context.state.deck = cards;
       context.dispatch({ type: 'DEAL_CARDS' });
     }
   }, [context.state.players[0].cards]);
@@ -21,15 +20,22 @@ export const Game = () => {
     }
   }, [context.state.selectedCards]);
   
+  const botIds = context.state.players.map((player, index) => index).slice(1);
+
   return (
     <div>
-      <h1>Game</h1>
-      <div>
+      <div className={styles["players"]}>
+      {context.state.players.map((player) => (
+          <div className={styles["players__player"]}>
+            <h2>{player.name}</h2>
+            <p>Lives: {player.lives}</p>
+          </div>
+        ))}
+      </div>
         <CenterCards />
         <PlayerCards />
         <Link to="/">Zpět</Link>
-        <Bot botId={1} />
-      </div>
+        {botIds.map(botId => <Bot key={botId} botId={botId} />)}
     </div>
   );
 }

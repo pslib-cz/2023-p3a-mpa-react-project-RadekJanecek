@@ -9,20 +9,20 @@ export const CenterCards = () => {
     const player = context.state.players.find(player => player.id === 1);
     const selectedCard = context.state.selectedCards[0];
 
-    const isSmallerThanAllRows = selectedCard && centerCards.every(row => selectedCard.id < row[row.length - 1].id);
+    const isSmallerThanAllRows = selectedCard && centerCards.every(row => row && row.length > 0 && selectedCard.id < row[row.length - 1].id);
 
     const handleRowClick = (rowIndex: number) => {
-      if (isSmallerThanAllRows && player) {
+      if (isSmallerThanAllRows && player && selectedCard) {
           context.dispatch({ type: 'SELECT_ROW', playerId: player.id, cardId: selectedCard.id, rowIndex });
       }
-  };
+    };
 
     return (
         <div>
           {centerCards.map((cards, index) => (
             <div key={index} className={styles.flex}>
             {cards.map((card) => (
-                <Card key={card.id} card={card} />
+                card ? <Card key={card.id} card={card} /> : null
             ))}
             {
               context.state.showArrows && player && (

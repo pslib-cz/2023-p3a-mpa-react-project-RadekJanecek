@@ -46,13 +46,13 @@ const shuffle = (deck: CardType[]): CardType[] => {
 };
 
 export const Context = createContext<IContext>({} as IContext);
+const numBots = JSON.parse(localStorage.getItem('numBots') || '0');
 
 const initialState: GameState = {
     deck: cards,
     players: [
-        { id: 0, name: 'Player', lives: 66, cards: [] },
-        { id: 1, name: 'Bot', lives: 66, cards: [] }
-    ],
+      {id: 0, name: 'Player', lives: 66, cards: []},
+      ...Array.from({ length: numBots }, (_, i) => ({ id: i + 1, name: `Bot${i + 1}`, lives: 66, cards: [] })),],
     centerCards: [],
     selectedCards: [],
     showArrows: false
@@ -61,14 +61,21 @@ const initialState: GameState = {
 const gameReducer = (state: GameState, action: Action): GameState => {
         const newState: GameState = JSON.parse(JSON.stringify(state));
         switch (action.type) {
-            case 'DEAL_CARDS': {
-                shuffle(newState.deck);
-                newState.players.forEach((player) => {
-                    player.cards = newState.deck.splice(0, 10);
-                });
-                for (let i = 0; i < 4; i++) newState.centerCards[i] = newState.deck.splice(0, 1);
-                return newState;
+          case 'DEAL_CARDS': {
+            shuffle(newState.deck);
+            const numCardsPerPlayer = 10;
+            const numCenterCards = 4;
+            for (let i = 0; i < numCenterCards; i++) {
+              newState.centerCards[i] = newState.deck.splice(0, 1);
             }
+            newState.players.forEach((player) => {
+                player.cards = newState.deck.splice(0, numCardsPerPlayer);
+            });
+            console.log(newState.players[0].cards);
+            console.log(newState.deck);
+            newState.deck = cards;
+            return newState;
+        }
             case 'SELECT_CARD': {
                 const player = newState.players[action.playerId];
                 if (player) {
@@ -79,7 +86,6 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     }
                 }
                 newState.selectedCards.sort((a, b) => a.id - b.id);
-                console.log(newState.players)
                 return newState;
             }
             case 'PLAY_CARD': {
@@ -87,7 +93,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 newState.selectedCards.forEach(card => {
                   let closestCenterIndex = -1;
                   let smallestDifference = Infinity;
-              
+                  console.log(newState.selectedCards);
                   newState.centerCards.forEach((centerCards, index) => {
                     const lastCardId = centerCards[centerCards.length - 1].id;
                     if (card.id > lastCardId && card.id - lastCardId < smallestDifference) {
@@ -104,7 +110,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
               
                     if (newState.centerCards[closestCenterIndex].length === 6) {
                       newState.centerCards[closestCenterIndex].splice(0, 5).forEach(card => {
-                        player.lives -= card.lives;
+                        newState.players[card.playerId ?? 0].lives -= card.lives;
                       });
                     }
                   } else {
@@ -151,6 +157,23 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 }
                 return newState;
             }
+            case 'ADD_BOT': {
+              if (newState.players.length < 10) {
+                const newBot = { id: newState.players.length, name: `Bot${newState.players.length}`, lives: 66, cards: [] };
+                newState.players.push(newBot);
+                localStorage.setItem('numBots', JSON.stringify(newState.players.length - 1));
+              return newState;
+              }
+              return newState;
+          }
+          case 'REMOVE_BOT': {
+              if (newState.players.length > 2) {
+                newState.players.pop();
+                localStorage.setItem('numBots', JSON.stringify(newState.players.length - 1));
+                  return newState;
+              }
+              return newState;
+          }
         }
         return newState;
 };
