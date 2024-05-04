@@ -86,14 +86,15 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     }
                 }
                 newState.selectedCards.sort((a, b) => a.id - b.id);
+                console.log(newState.selectedCards);
                 return newState;
             }
             case 'PLAY_CARD': {
                 const player = newState.players[action.playerId];
                 newState.selectedCards.forEach(card => {
+                  console.log(card);
                   let closestCenterIndex = -1;
                   let smallestDifference = Infinity;
-                  console.log(newState.selectedCards);
                   newState.centerCards.forEach((centerCards, index) => {
                     const lastCardId = centerCards[centerCards.length - 1].id;
                     if (card.id > lastCardId && card.id - lastCardId < smallestDifference) {
@@ -104,14 +105,17 @@ const gameReducer = (state: GameState, action: Action): GameState => {
               
                   if (closestCenterIndex !== -1) {
                     if (!newState.showArrows) {
-                        newState.centerCards[closestCenterIndex].push(card);
-                        newState.selectedCards = newState.selectedCards.filter(c => c.id !== card.id);
+                      newState.centerCards[closestCenterIndex].push(card);
+                      newState.selectedCards = newState.selectedCards.filter(c => c.id !== card.id);
                     }
-              
+
                     if (newState.centerCards[closestCenterIndex].length === 6) {
-                      newState.centerCards[closestCenterIndex].splice(0, 5).forEach(card => {
-                        newState.players[card.playerId ?? 0].lives -= card.lives;
-                      });
+                      const lastCard = newState.centerCards[closestCenterIndex].slice(-1)[0].playerId;
+                      if (lastCard !== undefined) {
+                        newState.centerCards[closestCenterIndex].splice(0, 5).forEach(card => {
+                          newState.players[lastCard].lives -= card.lives;
+                        });
+                      }
                     }
                   } else {
                     if (player.name.includes("Bot")) {
@@ -152,7 +156,12 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     });
                     newState.centerCards[action.rowIndex] = [card];
                     newState.showArrows = false;
-                    newState.selectedCards = newState.selectedCards.splice(cardIndex, 1);
+                    newState.selectedCards = newState.selectedCards.splice(cardIndex, newState.selectedCards.length - cardIndex);
+                    if (newState.centerCards[cardIndex].length === 6) {
+                      newState.centerCards[cardIndex].splice(0, 5).forEach(card => {
+                        player.lives -= card.lives;
+                      });
+                    }
                     return newState;
                 }
                 return newState;
