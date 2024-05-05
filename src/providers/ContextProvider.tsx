@@ -78,8 +78,6 @@ const gameReducer = (state: GameState, action: Action): GameState => {
             newState.players.forEach((player) => {
                 player.cards = newState.deck.splice(0, numCardsPerPlayer);
             });
-            console.log(newState.players[0].cards);
-            console.log(newState.deck);
             newState.deck = cards;
             return newState;
         }
@@ -93,13 +91,11 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     }
                 }
                 newState.selectedCards.sort((a, b) => a.id - b.id);
-                console.log(newState.selectedCards);
                 return newState;
             }
             case 'PLAY_CARD': {
                 const player = newState.players[action.playerId];
                 newState.selectedCards.forEach(card => {
-                  console.log(card);
                   let closestCenterIndex = -1;
                   let smallestDifference = Infinity;
                   newState.centerCards.forEach((centerCards, index) => {

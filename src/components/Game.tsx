@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect} from 'react';
 import { Context } from '../providers/ContextProvider.tsx';
 import { PlayerCards } from './PlayerCards.tsx';
@@ -27,7 +27,7 @@ export const Game = () => {
     }
   }, [context.state.selectedCards]);
   
-  const botIds = context.state.players.map((player, index) => index).slice(1);
+  const botIds = context.state.players.map((_, index) => index).slice(1);
 
   return (
     <div className={styles["board"]}>
