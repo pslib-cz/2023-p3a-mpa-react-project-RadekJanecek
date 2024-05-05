@@ -18,9 +18,9 @@ export const CenterCards = () => {
     };
 
     return (
-        <div>
+        <div className={styles["rows"]}>
           {centerCards.map((cards, index) => (
-            <div key={index} className={styles.flex}>
+            <div key={index} className={styles["row"]}>
             {cards.map((card) => (
                 card ? <Card key={card.id} card={card} /> : null
             ))}

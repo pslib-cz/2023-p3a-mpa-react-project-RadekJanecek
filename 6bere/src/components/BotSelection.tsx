@@ -1,20 +1,23 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Context } from '../providers/ContextProvider.tsx';
+import styles from './BotSelection.module.css';
 
 export const BotSelection = () => {
   const context = useContext(Context);
   return (
-    <div>
+    <>
       <h1>BotSelection</h1>
-      <div>
-        <button onClick={() => {context.dispatch({type: 'ADD_BOT'});}}>Add bot</button>
-        <button onClick={() => {context.dispatch({type: 'REMOVE_BOT'});}}>Remove bot</button>
-        <Link to="/game">Start</Link>
-        <Link to="/">Zpět</Link>
-        <p>Number of oponents: {context.state.players.length -1}</p>
+      <div className={styles["bots"]}>
+        <button className={styles["button"]} onClick={() => {context.dispatch({type: 'REMOVE_BOT'});}}>-</button>
+        <p>{context.state.players.length -1}</p>
+        <button className={styles["button"]} onClick={() => {context.dispatch({type: 'ADD_BOT'});}}>+</button>
       </div>
-    </div>
+      <div className={styles["buttons"]}>
+        <Link className={styles["button"]} to="/game">Start</Link>
+        <Link className={styles["button"]} to="/">Zpět</Link>
+      </div>
+    </>
   );
 }
 

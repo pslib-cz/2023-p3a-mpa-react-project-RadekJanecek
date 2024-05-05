@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../providers/ContextProvider";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "./Leaderboard.module.css";
 
 export const Leaderboard = () => {
     const context = useContext(Context);
@@ -22,7 +23,7 @@ export const Leaderboard = () => {
                     <p>Lives: {player.lives}</p>
                 </div>
             ))}
-            <Link to="/">Back</Link>
+            <Link className={styles["button"]} to="/">Menu</Link>
         </div>
     );
 }

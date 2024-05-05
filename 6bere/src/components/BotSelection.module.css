@@ -1,20 +1,13 @@
-.players {
+.bots {
     display: flex;
-    gap: .5em;
-    padding: 1em;
-    flex-wrap: wrap;
     justify-content: center;
-}
-.players__player {
-    display: flex;
-    flex-direction: column;
-    gap: .5em;
     align-items: center;
+    gap: 1em;
 }
-.board {
+.buttons {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 1em;
+    justify-content: center;
 }
 .button {
     padding: .5em 1em;

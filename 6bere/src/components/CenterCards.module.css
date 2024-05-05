@@ -1,3 +1,11 @@
-.flex {
+.row {
     display: flex;
+    gap: .25em;
+}
+.rows {
+    display: flex;
+    gap: .25em;
+    flex-direction: column;
+    min-width: 20em;
+    padding: .5em;
 }

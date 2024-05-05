@@ -30,18 +30,18 @@ export const Game = () => {
   const botIds = context.state.players.map((player, index) => index).slice(1);
 
   return (
-    <div>
+    <div className={styles["board"]}>
       <div className={styles["players"]}>
       {context.state.players.map((player) => (
           <div className={styles["players__player"]}>
-            <h2>{player.name}</h2>
-            <p>Lives: {player.lives}</p>
+            <span>{player.name}</span>
+            <span>{player.lives}</span>
           </div>
         ))}
       </div>
         <CenterCards />
         <PlayerCards />
-        <Link to="/">Zpět</Link>
+        <Link className={styles["button"]} to="/">Zpět</Link>
         {botIds.map(botId => <Bot key={botId} botId={botId} />)}
     </div>
   );
