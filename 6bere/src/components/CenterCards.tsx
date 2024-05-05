@@ -26,9 +26,7 @@ export const CenterCards = () => {
             ))}
             {
               context.state.showArrows && player && (
-                <div className={styles.arrow} onClick={() => handleRowClick(index)}>
-                  arrow
-                </div>
+                <div className={styles["arrow"]} onClick={() => handleRowClick(index)}></div>
               )
             }
           </div>

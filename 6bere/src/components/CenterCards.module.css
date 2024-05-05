@@ -9,3 +9,19 @@
     min-width: 20em;
     padding: .5em;
 }
+.arrow {
+    width: 3em;
+    height: 4.66em;
+    opacity: 1;
+    background-size: contain;
+    background-image: url(/images/arrow.png);
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .arrow {
+        width: 4em;
+        height: 6em;
+    }
+    
+}

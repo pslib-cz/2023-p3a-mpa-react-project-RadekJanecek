@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useReducer } from "react";
+import { PropsWithChildren, createContext, useEffect, useReducer } from "react";
 import React from "react";
 import { cards } from "../data/cards";
 
@@ -24,6 +24,8 @@ type Action =
   | { type: 'REMOVE_BOT' }
   | { type: 'SELECT_ROW'; playerId: number; cardId: number; rowIndex: number}
   | { type: 'CHECK_GAME_OVER' }
+  | { type: 'RESET' }
+  | { type: 'LOAD_STATE'; payload: GameState };
 
 type GameState = {
     deck: CardType[];
@@ -49,8 +51,9 @@ const shuffle = (deck: CardType[]): CardType[] => {
 
 export const Context = createContext<IContext>({} as IContext);
 const numBots = JSON.parse(localStorage.getItem('numBots') || '0');
+const storedState = JSON.parse(localStorage.getItem('gameState') || '{}');
 
-const initialState: GameState = {
+const initialState: GameState = storedState.gameState || {
     deck: cards,
     players: [
       {id: 0, name: 'Player', lives: 66, cards: []},
@@ -147,7 +150,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     }
                   }
                 });
-              
+                localStorage.setItem('gameState', JSON.stringify(newState));
                 return newState;
               }
             case 'SELECT_ROW': {
@@ -202,12 +205,23 @@ const gameReducer = (state: GameState, action: Action): GameState => {
           
             return newState;
           }
+          case 'RESET':
+            return initialState;
+          default:
+            return newState;
+          case 'LOAD_STATE': {
+            return action.payload;
+          }
         }
         return newState;
 };
 
 const ContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-    const [state, dispatch] = useReducer(gameReducer, initialState);
+    const [state, dispatch] = useReducer(gameReducer, storedState.gameOver ? initialState : storedState);
+
+    useEffect(() => {
+      localStorage.setItem('gameState', JSON.stringify(state));
+    }, [state]);
 
     return (
         <Context.Provider value={{ state, dispatch }}>
