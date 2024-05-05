@@ -12,10 +12,10 @@ export const Game = () => {
 
   useEffect(() => {
     context.dispatch({ type: 'CHECK_GAME_OVER' });
-    if (context.state.gameOver && context.state.players[0].cards.length === 0 && context.state.selectedCards.length === 0) {
+    if (context.state.gameOver) {
       navigate('/leaderboard')
     }
-  }, [context.state.centerCards]);
+  }, [context.state.players[0].cards.length === 0]);
   useEffect(() => {
     if (context.state.players[0].cards.length === 0 && context.state.selectedCards.length === 0) {
       context.dispatch({ type: 'DEAL_CARDS' });

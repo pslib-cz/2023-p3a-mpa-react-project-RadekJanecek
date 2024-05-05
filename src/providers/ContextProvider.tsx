@@ -213,7 +213,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
 };
 
 const ContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-    const [state, dispatch] = useReducer(gameReducer, storedState.gameOver ? initialState : storedState);
+    const [state, dispatch] = useReducer(gameReducer, storedState);
 
     useEffect(() => {
       localStorage.setItem('gameState', JSON.stringify(state));
