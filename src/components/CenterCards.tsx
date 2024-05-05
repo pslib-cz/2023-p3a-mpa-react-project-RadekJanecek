@@ -6,7 +6,7 @@ import styles from './CenterCards.module.css';
 export const CenterCards = () => {
     const context = useContext(Context);
     const centerCards = context.state.centerCards;
-    const player = context.state.players.find(player => player.id === 1);
+    const player = context.state.players.find(player => player.id === 0);
     const selectedCard = context.state.selectedCards[0];
 
     const isSmallerThanAllRows = selectedCard && centerCards.every(row => row && row.length > 0 && selectedCard.id < row[row.length - 1].id);

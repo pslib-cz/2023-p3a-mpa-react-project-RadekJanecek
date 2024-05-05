@@ -141,7 +141,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                         newState.selectedCards = newState.selectedCards.filter(c => c.id !== card.id);
                         return newState;
                       }
-                    } else {
+                    } else if (newState.selectedCards[0].playerId === 0) {
                       newState.showArrows = true;
                     }
                   }
@@ -149,7 +149,7 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                 localStorage.setItem('gameState', JSON.stringify(newState));
                 return newState;
               }
-            case 'SELECT_ROW': {
+              case 'SELECT_ROW': {
                 const cardIndex = newState.selectedCards.findIndex(card => card.id === action.cardId);
                 const player = newState.players[0];
                 if (cardIndex !== -1 && player) {
@@ -159,11 +159,13 @@ const gameReducer = (state: GameState, action: Action): GameState => {
                     });
                     newState.centerCards[action.rowIndex] = [card];
                     newState.showArrows = false;
-                    newState.selectedCards = newState.selectedCards.splice(cardIndex, newState.selectedCards.length - cardIndex);
-                    if (newState.centerCards[cardIndex].length === 6) {
-                      newState.centerCards[cardIndex].splice(0, 5).forEach(card => {
-                        player.lives -= card.lives;
-                      });
+                    if (newState.centerCards[action.rowIndex].length === 6) {
+                      const lastCard = newState.centerCards[action.rowIndex].slice(-1)[0].playerId;
+                      if (lastCard !== undefined) {
+                        newState.centerCards[action.rowIndex].splice(0, 5).forEach(card => {
+                          newState.players[lastCard].lives -= card.lives;
+                        });
+                      }
                     }
                     return newState;
                 }
