@@ -12,17 +12,17 @@ export const Game = () => {
 
   useEffect(() => {
     context.dispatch({ type: 'CHECK_GAME_OVER' });
-    if (context.state.gameOver) {
+    if (context.state.gameOver && context.state.players[0].cards.length === 0 && context.state.selectedCards.length === 0) {
       navigate('/leaderboard')
     }
-  }, [context.state.players[0].cards.length === 0, context.state.centerCards]);
+  }, [context.state.centerCards]);
   useEffect(() => {
     if (context.state.players[0].cards.length === 0 && context.state.selectedCards.length === 0) {
       context.dispatch({ type: 'DEAL_CARDS' });
     }
   }, [context.state.players[0].cards]);
   useEffect(() => {
-    if (context.state.selectedCards.length === context.state.players.length) {
+    if (context.state.selectedCards.length >= context.state.players.length) {
       context.dispatch({ type: 'PLAY_CARD', playerId: context.state.selectedCards[0].playerId ?? 0, cardId: context.state.selectedCards[0].id, selectedRowIndex: 0 });
     }
   }, [context.state.selectedCards]);
