@@ -15,7 +15,7 @@ export const Game = () => {
     if (context.state.gameOver) {
       navigate('/leaderboard')
     }
-  }, [context.state.players[0].cards.length === 0]);
+  }, [context.state.players[0].cards.length === 0, context.state.centerCards]);
   useEffect(() => {
     if (context.state.players[0].cards.length === 0 && context.state.selectedCards.length === 0) {
       context.dispatch({ type: 'DEAL_CARDS' });
