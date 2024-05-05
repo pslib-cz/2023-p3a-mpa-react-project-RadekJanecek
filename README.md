@@ -9,7 +9,7 @@ Hra je pro 2-10 hráčů, každý hráč na začátku hry dostane 10 karet. Upro
 
 Zde budou živé linky na:
 - figma návrh stránek aplikace
-- odkaz na gh-pages projektu
+- [6bere!]()
 - odkaz do repozitáře projektu, pokud pracuji v teamu a zde vývoj neprobíhá
 
 ### Z čeho čerpat
