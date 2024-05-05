@@ -35,7 +35,7 @@ export const Game = () => {
       {context.state.players.map((player) => (
           <div className={styles["players__player"]}>
             <span>{player.name}</span>
-            <span>{player.lives}</span>
+            <span>lives: {player.lives}</span>
           </div>
         ))}
       </div>
