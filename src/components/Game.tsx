@@ -5,6 +5,7 @@ import { PlayerCards } from './PlayerCards.tsx';
 import { CenterCards } from './CenterCards.tsx';
 import { Bot } from './Bot.tsx';
 import styles from './Game.module.css';
+import Styles from './Styles.module.css';
 
 export const Game = () => {
   const context = useContext(Context);
@@ -41,7 +42,7 @@ export const Game = () => {
       </div>
         <CenterCards />
         <PlayerCards />
-        <Link className={styles["button"]} to="/">Zpět</Link>
+        <Link className={Styles["button"]} to="/">Zpět</Link>
         {botIds.map(botId => <Bot key={botId} botId={botId} />)}
     </div>
   );

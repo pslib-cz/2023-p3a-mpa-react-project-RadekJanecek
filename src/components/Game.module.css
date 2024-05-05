@@ -10,21 +10,12 @@
     flex-direction: column;
     gap: .5em;
     align-items: center;
+    background-color: rgba(0, 0, 0, .5);
+    padding: 1em;
+    border-radius: 1em;
 }
 .board {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.button {
-    padding: .5em 1em;
-    color: white;
-    background-color: red;
-    border: none;
-    border-radius: 0.5em;
-    margin-top: 1em;
-}
-.button:hover {
-    background-color: darkred;
-    color: azure;
 }

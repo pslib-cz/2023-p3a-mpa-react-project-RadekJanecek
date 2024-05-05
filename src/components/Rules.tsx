@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Rules.module.css';
+import Styles from './Styles.module.css';
 
 export const Rules = () => {
   return (
@@ -12,7 +13,7 @@ export const Rules = () => {
         <p className={styles["text"]}>Každé kolo máte 10 karet v ruce a snažíte se pokládat vyšší karty na základě karet které jsou uprostřed. Uprostřed jsou 4 řady karet, když na řadu položíte kartu a bude na 6. pozici, odečtou se vám životy podle karet které byly před vaší. Když si vyberete nižší kartu než jsou všechny poslední karty v řadách, tak si vyberete jednu z řad a přijdete o životy na základě karet které byly v dané řadě.</p>
         <h2 className={styles["text"]}>Konec hry:</h2>
         <p className={styles["text"]}>Když některý z hráčů dosáhne 0 životů, nebo méně, tak hra skončí a vyhrává ten, komu zbylo nejvíce životů.</p>
-        <Link className={styles["button"]} to="/">Zpět</Link>
+        <Link className={Styles["button"]} to="/">Zpět</Link>
       </div>
     </div>
   );

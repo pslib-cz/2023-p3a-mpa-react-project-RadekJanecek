@@ -4,17 +4,6 @@
     gap: 1em;
     justify-content: center;
 }
-.button {
-    padding: .5em 1em;
-    color: white;
-    background-color: red;
-    border: none;
-    border-radius: 0.5em;
-}
-.button:hover {
-    background-color: darkred;
-    color: azure;
-}
 
 @media (min-width: 768px) {
     .buttons {

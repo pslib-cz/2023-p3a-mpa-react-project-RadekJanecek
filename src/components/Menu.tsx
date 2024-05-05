@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Menu.module.css';
 import { useContext } from 'react';
 import { Context } from '../providers/ContextProvider';
+import Styles from './Styles.module.css';
 
 export const Menu = () => {
   const context = useContext(Context);
@@ -19,9 +20,9 @@ export const Menu = () => {
       <div>
         <h1>6bere!</h1>
         <div className={styles["buttons"]}>
-          <Link className={styles["button"]} to="/botselection" onClick={(handleNewGameClick)}>Nová hra</Link>
-          <Link className={styles["button"]} to="/game" onClick={handleContinueClick}>Pokračovat</Link>
-          <Link className={styles["button"]} to="/rules">Pravidla</Link>
+          <Link className={Styles["button"]} to="/botselection" onClick={(handleNewGameClick)}>Nová hra</Link>
+          <Link className={Styles["button"]} to="/game" onClick={handleContinueClick}>Pokračovat</Link>
+          <Link className={Styles["button"]} to="/rules">Pravidla</Link>
         </div>
       </div>
     </>
