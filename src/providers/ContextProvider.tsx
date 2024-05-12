@@ -95,7 +95,8 @@ const gameReducer = (state: GameState, action: Action): GameState => {
             }
             case 'PLAY_CARD': {
                 const player = newState.players[action.playerId];
-                newState.selectedCards.forEach(card => {
+                const selectedCardsCopy = [...newState.selectedCards];
+                selectedCardsCopy.forEach(card => {
                   let closestCenterIndex = -1;
                   let smallestDifference = Infinity;
                   newState.centerCards.forEach((centerCards, index) => {
