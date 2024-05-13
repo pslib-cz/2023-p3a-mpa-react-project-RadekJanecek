@@ -4,11 +4,11 @@ import Leaderboard from './components/Leaderboard.tsx'
 import Game from './components/Game.tsx'
 import Menu from './components/Menu.tsx'
 import Rules from './components/Rules.tsx'
-import { createRoutesFromElements, RouterProvider, Route, createHashRouter } from 'react-router-dom'
+import { createRoutesFromElements, RouterProvider, Route, createBrowserRouter} from 'react-router-dom'
 
 function App() {
 
-  const router = createHashRouter(
+  const router = createBrowserRouter(
     createRoutesFromElements([
       <Route path="/" element={<Menu />} />,
       <Route path="/game" element={<Game />} />,
@@ -16,6 +16,7 @@ function App() {
       <Route path="/botselection" element={<BotSelection />} />,
       <Route path="/leaderboard" element={<Leaderboard />} />
     ]),
+    {basename: '/2023-p3a-mpa-react-project-RadekJanecek'}
   );
   return (
     <>
