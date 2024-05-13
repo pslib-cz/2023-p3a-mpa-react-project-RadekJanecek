@@ -1,0 +1,15 @@
+.card {
+    width: 3em;
+    height: 4.66em;
+    opacity: 1;
+    background-size: contain;
+    border-radius: .125em;
+}
+
+@media (min-width: 768px) {
+    .card {
+        width: 4em;
+        height: 6em;
+    }
+    
+}

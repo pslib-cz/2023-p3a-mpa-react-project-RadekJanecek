@@ -1,0 +1,11 @@
+.bots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+.buttons {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+}

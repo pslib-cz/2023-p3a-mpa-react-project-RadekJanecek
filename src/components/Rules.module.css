@@ -1,0 +1,10 @@
+.rules {
+    max-width: 40em;
+    padding: 1em;
+    border: none;
+    border-radius: 1em;
+    background-color: rgba(0, 0, 0, .5);
+}
+.text {
+    text-align: start;
+}

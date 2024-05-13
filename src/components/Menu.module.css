@@ -1,0 +1,13 @@
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .buttons {
+        flex-direction: row;
+    }
+    
+}

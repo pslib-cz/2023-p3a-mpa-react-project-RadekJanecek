@@ -1,14 +1,15 @@
-# Název mého projektu, programu, hry...
+# 6 bere!
 
 ## Téma
 
-Tady bude krátký a úderný popis o účelu, významu, funkcionalitě...
+Cílem hry je mít nejmenší počet trestných bodů.
+Hra je pro 2-10 hráčů, každý hráč na začátku hry dostane 10 karet. Uprostřed jsou další 4 karty na které hráči pokládají karty které mají větší číslo.
 
 ## Odkazy pro vývoj
 
 Zde budou živé linky na:
-- figma návrh stránek aplikace
-- odkaz na gh-pages projektu
+- [Figma](https://www.figma.com/file/NdSEQ2C5dlYvGNbtXS0mLW/6bere!?type=design&node-id=0-1&mode=design&t=pwL2Z3PNb4UtVRof-0)
+- [6bere!](https://pslib-cz.github.io/2023-p3a-mpa-react-project-RadekJanecek/)
 - odkaz do repozitáře projektu, pokud pracuji v teamu a zde vývoj neprobíhá
 
 ### Z čeho čerpat
